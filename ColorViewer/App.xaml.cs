@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ColorViewer.Models;
+using ColorViewer.ViewModels;
+using ColorViewer.Views;
+using Ninject;
+using System;
 using System.Windows;
 
 namespace ColorViewer
@@ -11,7 +10,29 @@ namespace ColorViewer
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    internal sealed partial class App : Application
     {
+        private readonly Lazy<IKernel> container;
+
+        public App()
+        {
+            container = new Lazy<IKernel>(CreateContainer);
+        }
+
+        private IKernel CreateContainer()
+        {
+            var container = new StandardKernel();
+            container.Bind<IColorManager>().To<ColorManager>().InSingletonScope();
+            container.Bind<IColorViewModelFactory>().To<ColorViewModelFactory>().InSingletonScope();
+            return container;
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            var view = container.Value.Get<MainWindowView>();
+            view.Show();
+        }
     }
 }
