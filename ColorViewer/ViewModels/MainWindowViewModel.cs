@@ -25,23 +25,23 @@ namespace ColorViewer.ViewModels
             currentColor = new Color(255, 0, 0, 0);
 
             PropertyChanged += (sender, e) =>
-              {
-                  if (e.PropertyName.Equals(nameof(Alpha)) ||
-                      e.PropertyName.Equals(nameof(Red)) ||
-                      e.PropertyName.Equals(nameof(Green)) ||
-                      e.PropertyName.Equals(nameof(Blue)))
-                  {
-                      OnPropertyChanged(new PropertyChangedEventArgs(nameof(ColorName)));
-                      addCommand.RaiseCanExevuteChanged();
-                  }
-              };
+            {
+                if (e.PropertyName.Equals(nameof(Alpha)) ||
+                    e.PropertyName.Equals(nameof(Red)) ||
+                    e.PropertyName.Equals(nameof(Green)) ||
+                    e.PropertyName.Equals(nameof(Blue)))
+                {
+                    OnPropertyChanged(new PropertyChangedEventArgs(nameof(ColorName)));
+                    addCommand.RaiseCanExevuteChanged();
+                }
+            };
 
             colorManager.ColorAdded += (sender, e) =>
-              {
-                  colors.Add(new KeyValuePair<string, ColorViewModel>
-                      (e.Color.ToString(), viewModelFactory.CreateUserViewModel((e.Color))));
-                  addCommand.RaiseCanExevuteChanged();
-              };
+            {
+                colors.Add(new KeyValuePair<string, ColorViewModel>
+                    (e.Color.ToString(), viewModelFactory.CreateUserViewModel((e.Color))));
+                addCommand.RaiseCanExevuteChanged();
+            };
 
             colorManager.ColorDeleted += (sender, e) =>
             {
