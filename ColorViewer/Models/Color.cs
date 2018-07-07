@@ -15,7 +15,6 @@ namespace ColorViewer.Models
             color = new byte[4] { alpha, red, green, blue };
         }
 
-
         public byte Alpha
         {
             get => color[0];
