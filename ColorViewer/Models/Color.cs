@@ -54,7 +54,7 @@ namespace ColorViewer.Models
 
         public override string ToString()
         {
-            return $"#{ BitConverter.ToString(color).Replace("-", String.Empty)}";
+            return $"#{ BitConverter.ToString(color).Replace("-", string.Empty)}";
         } 
     }
 }
