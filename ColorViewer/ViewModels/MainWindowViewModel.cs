@@ -50,6 +50,7 @@ namespace ColorViewer.ViewModels
                     if (color.Key.Equals(e.Color.ToString()))
                     {
                         colors.Remove(color);
+                        addCommand.RaiseCanExevuteChanged();
                         break;
                     }
                 }
